@@ -10,7 +10,7 @@ mackerel-plugin-jitsi-videobridge
 Description
 --------------------------------------------------------------------------------
 
-The plugin to posts Jitsi Videobridge statistics as custom metrics to Makckerel.
+The plugin to posts Jitsi Videobridge statistics as custom metrics to Mackerel.
 
 
 Requirements
