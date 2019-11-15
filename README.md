@@ -1,7 +1,7 @@
 mackerel-plugin-jitsi-videobridge
 ================================================================================
 
-[Jitsi Videobridge][] custom metrics plugin for [mackerel agent][]..
+[Jitsi Videobridge][] custom metrics plugin for [mackerel agent][].
 
 [mackerel agent]: https://github.com/mackerelio/mackerel-agent
 [Jitsi Videobridge]: https://jitsi.org/jitsi-videobridge/
@@ -35,7 +35,7 @@ $ mkr plugin install tomohiro/mackerel-plugin-jitsi-videobridge@v0.0.1
 ```
 
 
-Synopsis
+Usage
 --------------------------------------------------------------------------------
 
 ```
