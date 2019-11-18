@@ -15,10 +15,10 @@ test: deps
 
 deps:
 	@echo "===> Installing runtime dependencies..."
-	@echo "TODO: do nothing"
+	go mod download
 
 updatedeps:
 	@echo "===> Updating runtime dependencies..."
-	@echo "TODO: do nothing"
+	go get -u
 
 .PHONY: help test deps updatedeps
