@@ -1,5 +1,5 @@
 # Project information
-PACKAGE=mackerel-plugin-jitsi-videobridge
+PACKAGE = $(shell basename ${PWD})
 
 # Tasks
 help:
@@ -7,6 +7,7 @@ help:
 	@echo "  test         Run tests"
 	@echo "  deps         Install runtime dependencies"
 	@echo "  updatedeps   Update runtime dependencies"
+	@echo "  clean        Clean output binary"
 	@echo "  help         Show this help messages"
 
 test: deps
@@ -21,4 +22,8 @@ updatedeps:
 	@echo "===> Updating runtime dependencies..."
 	go get -u
 
-.PHONY: help test deps updatedeps
+clean:
+	@echo "===> Clean output binary..."
+	rm ./$(PACKAGE)
+
+.PHONY: help test deps updatedeps clean
