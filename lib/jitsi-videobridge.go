@@ -207,8 +207,8 @@ func transformStatsToMetrics(s *Stats) map[string]float64 {
 // Do the plugin
 func Do() {
 	optPrefix := flag.String("metric-key-prefix", "jitsi-videobridge", "Metric key prefix")
-	optHost := flag.String("host", "127.0.0.1", "Hostname or IP address of Jitsi Videobridge Colibri REST float64erface")
-	optPort := flag.String("port", "80", "Port of Jitsi Videobridge Colibri REST float64erface")
+	optHost := flag.String("host", "127.0.0.1", "Hostname or IP address of Jitsi Videobridge Colibri REST interface")
+	optPort := flag.String("port", "80", "Port of Jitsi Videobridge Colibri REST interface")
 	optTempfile := flag.String("tempfile", "", "Temp file name")
 	flag.Parse()
 
