@@ -16,9 +16,6 @@ type JitsiVideobridgePlugin struct {
 
 // MetricKeyPrefix returns prefix of Jitsi Videobridge metrics
 func (p JitsiVideobridgePlugin) MetricKeyPrefix() string {
-	if p.Prefix == "" {
-		p.Prefix = "jitsi-videobridge"
-	}
 	return p.Prefix
 }
 
@@ -38,7 +35,8 @@ func (p JitsiVideobridgePlugin) GraphDefinition() map[string]mp.Graphs {
 
 // FetchMetrics fetches metrics from Jitsi Videobridge Colibri REST interface
 func (p JitsiVideobridgePlugin) FetchMetrics() (map[string]float64, error) {
-	return map[string]float64{"audiochannels": 0}, nil
+	metrics := make(map[string]float64)
+	return metrics, nil
 }
 
 // Do the plugin
@@ -54,6 +52,7 @@ func Do() {
 		Host:   *optHost,
 		Port:   *optPort,
 	}
+
 	helper := mp.NewMackerelPlugin(p)
 	helper.Tempfile = *optTempfile
 	helper.Run()

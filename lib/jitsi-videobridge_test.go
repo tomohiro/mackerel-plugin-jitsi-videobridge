@@ -4,13 +4,33 @@ import (
 	"testing"
 )
 
-func TestMetricKeyPrefix(t *testing.T) {
-	var p JitsiVideobridgePlugin
+var (
+	plugin JitsiVideobridgePlugin
+)
 
-	expected := "jitsi-videobridge"
-	actual := p.MetricKeyPrefix()
-
-	if actual != expected {
-		t.Errorf("MetricKeyPrefix: %v should be %v", actual, expected)
+func setup() {
+	plugin = JitsiVideobridgePlugin{
+		Prefix: "jitsi-videobridge",
+		Host:   "127.0.0.1",
+		Port:   "80",
 	}
+}
+
+func TestMetricKeyPrefix(t *testing.T) {
+	setup()
+
+	want := "jitsi-videobridge"
+	got := plugin.MetricKeyPrefix()
+
+	if want != got {
+		t.Errorf("MetricKeyPrefix: %v should be %v", want, got)
+	}
+}
+
+func TestGraphDefinition(t *testing.T) {
+	t.Skip()
+}
+
+func TestFetchMetrics(t *testing.T) {
+	t.Skip()
 }
