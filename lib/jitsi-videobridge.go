@@ -82,11 +82,19 @@ func (p JitsiVideobridgePlugin) MetricKeyPrefix() string {
 func (p JitsiVideobridgePlugin) GraphDefinition() map[string]mp.Graphs {
 	labelPrefix := strings.Title(p.MetricKeyPrefix())
 	return map[string]mp.Graphs{
-		"Audio Channels": {
-			Label: labelPrefix,
+		"cpu": {
+			Label: fmt.Sprintf("%s: cpu", labelPrefix),
 			Unit:  mp.UnitInteger,
 			Metrics: []mp.Metrics{
-				{Name: "audiochannels", Label: "Audio Channels"},
+				{Name: "cpu_usage", Label: "Usage"},
+			},
+		},
+		"memory": {
+			Label: fmt.Sprintf("%s: memory", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "total_memory", Label: "Total", Stacked: true},
+				{Name: "used_memory", Label: "Used", Stacked: true},
 			},
 		},
 	}
