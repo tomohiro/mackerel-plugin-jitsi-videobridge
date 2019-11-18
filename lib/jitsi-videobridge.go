@@ -116,8 +116,10 @@ func (p JitsiVideobridgePlugin) FetchMetrics() (map[string]float64, error) {
 func transformStatsToMetrics(s *Stats) map[string]float64 {
 	metrics := make(map[string]float64)
 
-	// CPU / Memory
+	// CPU
 	metrics["cpu_usage"] = s.CPUUsage
+
+	// Memory
 	metrics["total_memory"] = s.TotalMemory
 	metrics["used_memory"] = s.UsedMemory
 
