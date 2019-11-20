@@ -20,9 +20,10 @@ func setup() {
 	server = httptest.NewServer(mux)
 	u, _ := url.Parse(server.URL)
 	plugin = JitsiVideobridgePlugin{
-		Prefix: "jitsi-videobridge",
-		Host:   u.Hostname(),
-		Port:   u.Port(),
+		KeyPrefix:   "jitsi-videobridge",
+		LabelPrefix: "JVB",
+		Host:        u.Hostname(),
+		Port:        u.Port(),
 	}
 }
 

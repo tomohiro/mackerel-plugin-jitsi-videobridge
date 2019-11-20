@@ -5,16 +5,16 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
-	"strings"
 
 	mp "github.com/mackerelio/go-mackerel-plugin"
 )
 
 // JitsiVideobridgePlugin as Mackerel agent plugin for Jitsi Videobridge
 type JitsiVideobridgePlugin struct {
-	Prefix string
-	Host   string
-	Port   string
+	KeyPrefix   string
+	LabelPrefix string
+	Host        string
+	Port        string
 }
 
 // Stats represents a statistics.
@@ -75,26 +75,54 @@ type Stats struct {
 
 // MetricKeyPrefix returns prefix of Jitsi Videobridge metrics
 func (p JitsiVideobridgePlugin) MetricKeyPrefix() string {
-	return p.Prefix
+	return p.KeyPrefix
 }
 
 // GraphDefinition returns graph definition
 func (p JitsiVideobridgePlugin) GraphDefinition() map[string]mp.Graphs {
-	labelPrefix := strings.Title(p.MetricKeyPrefix())
+	labelPrefix := p.LabelPrefix
 	return map[string]mp.Graphs{
 		"cpu": {
 			Label: fmt.Sprintf("%s: cpu", labelPrefix),
-			Unit:  mp.UnitInteger,
+			Unit:  mp.UnitPercentage,
 			Metrics: []mp.Metrics{
-				{Name: "cpu_usage", Label: "Usage"},
+				{Name: "cpu_usage", Label: "Usage", Scale: 100},
 			},
 		},
 		"memory": {
 			Label: fmt.Sprintf("%s: memory", labelPrefix),
 			Unit:  mp.UnitInteger,
 			Metrics: []mp.Metrics{
-				{Name: "total_memory", Label: "Total", Stacked: true},
-				{Name: "used_memory", Label: "Used", Stacked: true},
+				{Name: "total_memory", Label: "Total"},
+				{Name: "used_memory", Label: "Used"},
+			},
+		},
+		"thread": {
+			Label: fmt.Sprintf("%s: JVM threads", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "threads", Label: "Threads"},
+			},
+		},
+		"conference": {
+			Label: fmt.Sprintf("%s: Conference", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "conferences", Label: "Ongoing"},
+				{Name: "total_conferences_completed", Label: "Completed", Diff: true},
+				{Name: "total_conferences_created", Label: "Created", Diff: true},
+				{Name: "total_failed_conferences", Label: "Failed", Diff: true},
+				{Name: "total_partially_failed_conferences", Label: "Partially Failed", Diff: true},
+			},
+		},
+		"conference_time": {
+			Label: fmt.Sprintf("%s: Conference Time (sec)", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "total_conference_seconds", Label: "Completed"},
+				{Name: "total_loss_controlled_participant_seconds", Label: "Loss Controlled"},
+				{Name: "total_loss_degraded_participant_seconds", Label: "Loss Degraded"},
+				{Name: "total_loss_limited_participant_seconds", Label: "Loss Limited"},
 			},
 		},
 	}
@@ -206,16 +234,18 @@ func transformStatsToMetrics(s *Stats) map[string]float64 {
 
 // Do the plugin
 func Do() {
-	optPrefix := flag.String("metric-key-prefix", "jitsi-videobridge", "Metric key prefix")
+	optKeyPrefix := flag.String("metric-key-prefix", "jitsi-videobridge", "Metric key prefix")
+	optLabelPrefix := flag.String("metric-label-prefix", "JVB", "Metric label prefix")
 	optHost := flag.String("host", "127.0.0.1", "Hostname or IP address of Jitsi Videobridge Colibri REST interface")
 	optPort := flag.String("port", "80", "Port of Jitsi Videobridge Colibri REST interface")
 	optTempfile := flag.String("tempfile", "", "Temp file name")
 	flag.Parse()
 
 	p := JitsiVideobridgePlugin{
-		Prefix: *optPrefix,
-		Host:   *optHost,
-		Port:   *optPort,
+		KeyPrefix:   *optKeyPrefix,
+		LabelPrefix: *optLabelPrefix,
+		Host:        *optHost,
+		Port:        *optPort,
 	}
 
 	helper := mp.NewMackerelPlugin(p)
