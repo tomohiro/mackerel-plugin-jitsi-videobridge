@@ -143,7 +143,7 @@ func (p JitsiVideobridgePlugin) FetchMetrics() (map[string]float64, error) {
 
 	stats := Stats{}
 	if err = json.NewDecoder(res.Body).Decode(&stats); err != nil {
-		return nil, fmt.Errorf("failed to decode a responded JSON. %w", err)
+		return nil, fmt.Errorf("failed to decode a responded JSON: %w", err)
 	}
 
 	return transformStatsToMetrics(&stats), nil
