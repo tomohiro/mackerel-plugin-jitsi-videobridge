@@ -84,7 +84,7 @@ Development
 - Edit CHANGELOG.md, git commit, git push
 - git tag vx.y.z (Semantic Versioning)
 - `make dist` to build and ship package as release assets
-- GITHUB_TOKEN=... `make release` to publish assets to GitHub
+- `GITHUB_TOKEN=... make release` to publish assets to GitHub
 
 
 References
