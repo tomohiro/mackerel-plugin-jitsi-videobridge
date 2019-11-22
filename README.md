@@ -12,6 +12,8 @@ Description
 
 The plugin to posts Jitsi Videobridge statistics as custom metrics to Mackerel.
 
+![Custom Metrics Example](https://user-images.githubusercontent.com/54254/69406552-a9268580-0d45-11ea-9701-0905b8fefa3e.png)
+
 
 Requirements
 --------------------------------------------------------------------------------
