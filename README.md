@@ -1,6 +1,11 @@
 mackerel-plugin-jitsi-videobridge
 ================================================================================
 
+[![GitHub Releases](https://img.shields.io/github/release/tomohiro/mackerel-plugin-jitsi-videobridge.svg?style=flat-square)](https://github.com/tomohiro/mackerel-plugin-jitsi-videobridge/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/tomohiro/mackerel-plugin-jitsi-videobridge?style=flat-square)](https://goreportcard.com/report/github.com/tomohiro/mackerel-plugin-jitsi-videobridge)
+[![Apache License](http://img.shields.io/badge/license-Apache-blue.svg?style=flat-square)](https://github.com/tomohiro/mackerel-plugin-jitsi-videobridgeblob/master/LICENSE)
+
+
 [Jitsi Videobridge][] custom metrics plugin for [mackerel agent][].
 
 [mackerel agent]: https://github.com/mackerelio/mackerel-agent
