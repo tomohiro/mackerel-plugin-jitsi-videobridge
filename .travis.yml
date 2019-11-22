@@ -1,0 +1,11 @@
+language: go
+sudo: false
+
+matrix:
+  fast_finish: true
+  include:
+    - go: 1.13
+      script: make test
+
+notifications:
+  email: false
