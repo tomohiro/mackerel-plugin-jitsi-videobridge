@@ -40,8 +40,6 @@ $ mkr plugin install tomohiro/mackerel-plugin-jitsi-videobridge@v0.0.1
 Usage
 --------------------------------------------------------------------------------
 
-### Options:
-
 ```
 $ mackerel-plugin-jitsi-videobridge --help
 Usage of mackerel-plugin-jitsi-videobridge:
