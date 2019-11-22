@@ -154,14 +154,14 @@ func (p JitsiVideobridgePlugin) GraphDefinition() map[string]mp.Graphs {
 		},
 		"jitter": {
 			Label: fmt.Sprintf("%s: Jitter", labelPrefix),
-			Unit:  mp.UnitInteger,
+			Unit:  mp.UnitFloat,
 			Metrics: []mp.Metrics{
 				{Name: "jitter_aggregate", Label: "Aggregate"},
 			},
 		},
 		"rtt": {
 			Label: fmt.Sprintf("%s: Round Trip Time (ms)", labelPrefix),
-			Unit:  mp.UnitInteger,
+			Unit:  mp.UnitFloat,
 			Metrics: []mp.Metrics{
 				{Name: "rtt_aggregate", Label: "Aggregate"},
 			},
