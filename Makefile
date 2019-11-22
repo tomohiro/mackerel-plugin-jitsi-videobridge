@@ -1,11 +1,13 @@
 # Project information
+OWNER    = "tomohiro"
 PACKAGE  = $(shell basename ${PWD})
 VERSION  = $(shell git describe --abbrev=0 --tags)
 
 # Build information
-DIST_DIR = $(shell pwd)/dist
-XC_OS	 = "linux darwin"
-XC_ARCH	 = "386 amd64"
+DIST_DIR   = $(shell pwd)/dist
+ASSETS_DIR = $(DIST_DIR)/$(VERSION)
+XC_OS	   = "linux darwin"
+XC_ARCH	   = "386 amd64"
 
 # Tasks
 help:
@@ -14,8 +16,9 @@ help:
 	@echo "  deps         Install runtime dependencies"
 	@echo "  updatedeps   Update runtime dependencies"
 	@echo "  test         Run tests"
-	@echo "  dist         Ship packages to release"
-	@echo "  clean        Clean output binary"
+	@echo "  dist         Ship packages as release assets"
+	@echo "  release 	  Publish release assets to GitHub"
+	@echo "  clean        Clean assets"
 	@echo "  help         Show this help messages"
 
 setup:
@@ -37,15 +40,19 @@ updatedeps:
 
 test: deps
 	@echo "===> Running tests..."
-	go test -v -cover ./lib
+	go test -v -cover ./...
 
 dist:
-	@echo "===> Build and shipping packages..."
-	goxz -d $(DIST_DIR) -os $(XC_OS) -arch $(XC_ARCH) -pv $(VERSION) 
+	@echo "===> Shipping packages as release assets..."
+	goxz -d $(ASSETS_DIR) -os $(XC_OS) -arch $(XC_ARCH) -pv $(VERSION) 
+
+release:
+	@echo "===> Publishing release assets to GitHub..."
+	ghr -u $(OWNER) -r $(PACKAGE) $(VSERION) $(ASSETS_DIR)
 
 clean:
-	@echo "===> Clean artifacts..."
+	@echo "===> Cleaning assets..."
 	go clean
 	rm -rf $(DIST_DIR)
 
-.PHONY: help setup test deps updatedeps clean
+.PHONY: help setup deps updatedeps test dist release clean
