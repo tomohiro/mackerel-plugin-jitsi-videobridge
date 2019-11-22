@@ -54,7 +54,7 @@ dist: deps
 
 release:
 	@echo "===> Publishing release assets to GitHub..."
-	ghr -u $(OWNER) -r $(PACKAGE) $(VSERION) $(ASSETS_DIR)
+	ghr -u $(OWNER) -r $(PACKAGE) $(VERSION) $(ASSETS_DIR)
 
 clean:
 	@echo "===> Cleaning assets..."
