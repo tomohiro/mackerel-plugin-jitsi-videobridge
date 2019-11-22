@@ -83,18 +83,18 @@ func (p JitsiVideobridgePlugin) GraphDefinition() map[string]mp.Graphs {
 	labelPrefix := p.LabelPrefix
 	return map[string]mp.Graphs{
 		"cpu": {
-			Label: fmt.Sprintf("%s: cpu", labelPrefix),
+			Label: fmt.Sprintf("%s: CPU", labelPrefix),
 			Unit:  mp.UnitPercentage,
 			Metrics: []mp.Metrics{
 				{Name: "cpu_usage", Label: "Usage", Scale: 100},
 			},
 		},
 		"memory": {
-			Label: fmt.Sprintf("%s: memory", labelPrefix),
+			Label: fmt.Sprintf("%s: Memory", labelPrefix),
 			Unit:  mp.UnitInteger,
 			Metrics: []mp.Metrics{
-				{Name: "total_memory", Label: "Total"},
-				{Name: "used_memory", Label: "Used"},
+				{Name: "total_memory", Label: "Total", Stacked: true},
+				{Name: "used_memory", Label: "Used", Stacked: true},
 			},
 		},
 		"thread": {
@@ -104,25 +104,127 @@ func (p JitsiVideobridgePlugin) GraphDefinition() map[string]mp.Graphs {
 				{Name: "threads", Label: "Threads"},
 			},
 		},
-		"conference": {
-			Label: fmt.Sprintf("%s: Conference", labelPrefix),
+		"conferences": {
+			Label: fmt.Sprintf("%s: Conferences", labelPrefix),
 			Unit:  mp.UnitInteger,
 			Metrics: []mp.Metrics{
-				{Name: "conferences", Label: "Ongoing"},
+				{Name: "conferences", Label: "Current"},
 				{Name: "total_conferences_completed", Label: "Completed", Diff: true},
 				{Name: "total_conferences_created", Label: "Created", Diff: true},
 				{Name: "total_failed_conferences", Label: "Failed", Diff: true},
 				{Name: "total_partially_failed_conferences", Label: "Partially Failed", Diff: true},
 			},
 		},
-		"conference_time": {
-			Label: fmt.Sprintf("%s: Conference Time (sec)", labelPrefix),
+		"conference_duration": {
+			Label: fmt.Sprintf("%s: Conference Duration (min)", labelPrefix),
 			Unit:  mp.UnitInteger,
 			Metrics: []mp.Metrics{
-				{Name: "total_conference_seconds", Label: "Completed"},
-				{Name: "total_loss_controlled_participant_seconds", Label: "Loss Controlled"},
-				{Name: "total_loss_degraded_participant_seconds", Label: "Loss Degraded"},
-				{Name: "total_loss_limited_participant_seconds", Label: "Loss Limited"},
+				{Name: "total_conference_seconds", Label: "Completed", Scale: (1 / 60.0)},
+				{Name: "total_loss_controlled_participant_seconds", Label: "Loss Controlled", Scale: (1 / 60.0)},
+				{Name: "total_loss_degraded_participant_seconds", Label: "Loss Degraded", Scale: (1 / 60.0)},
+				{Name: "total_loss_limited_participant_seconds", Label: "Loss Limited", Scale: (1 / 60.0)},
+			},
+		},
+		"participants": {
+			Label: fmt.Sprintf("%s: Participants", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "participants", Label: "Current"},
+				{Name: "total_participants", Label: "Total"},
+				{Name: "largest_conference", Label: "Largest (1 room)"},
+			},
+		},
+		"channels": {
+			Label: fmt.Sprintf("%s: Channels", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "audiochannels", Label: "Audio"},
+				{Name: "videochannels", Label: "Video"},
+				{Name: "videostreams", Label: "Video Stream"},
+			},
+		},
+		"ice_connections": {
+			Label: fmt.Sprintf("%s: ICE Connections", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "total_ice_succeeded", Label: "Succeeded"},
+				{Name: "total_ice_succeeded_tcp", Label: "Succeeded (TCP)"},
+				{Name: "total_ice_failed", Label: "Failed"},
+			},
+		},
+		"jitter": {
+			Label: fmt.Sprintf("%s: Jitter", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "jitter_aggregate", Label: "Aggregate"},
+			},
+		},
+		"rtt": {
+			Label: fmt.Sprintf("%s: Round Trip Time (ms)", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "rtt_aggregate", Label: "Aggregate"},
+			},
+		},
+		"bit_rate": {
+			Label: fmt.Sprintf("%s: Bitrate", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "bit_rate_download", Label: "Download"},
+				{Name: "bit_rate_upload", Label: "Upload"},
+			},
+		},
+		"packet_rate": {
+			Label: fmt.Sprintf("%s: Packet Rate", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "packet_rate_download", Label: "Download"},
+				{Name: "packet_rate_upload", Label: "Upload"},
+			},
+		},
+		"packet_loss_rate": {
+			Label: fmt.Sprintf("%s: RTP Packet Loss Rate", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "loss_rate_download", Label: "Download"},
+				{Name: "loss_rate_upload", Label: "Upload"},
+			},
+		},
+		"bytes": {
+			Label: fmt.Sprintf("%s: Bytes", labelPrefix),
+			Unit:  mp.UnitBytes,
+			Metrics: []mp.Metrics{
+				{Name: "total_bytes_received", Label: "Received"},
+				{Name: "total_bytes_received_octo", Label: "Received (Octo)"},
+				{Name: "total_bytes_sent", Label: "Sent"},
+				{Name: "total_bytes_sent_octo", Label: "Sent (Octo)"},
+			},
+		},
+		"packets": {
+			Label: fmt.Sprintf("%s: Packets", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "total_packets_received", Label: "Received"},
+				{Name: "total_packets_received_octo", Label: "Received (Octo)"},
+				{Name: "total_packets_sent", Label: "Sent"},
+				{Name: "total_packets_sent_octo", Label: "Sent (Octo)"},
+				{Name: "total_packets_dropped_octo", Label: "Dropped"},
+			},
+		},
+		"data_channel": {
+			Label: fmt.Sprintf("%s: DataChannel Messages", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "total_data_channel_messages_received", Label: "Received"},
+				{Name: "total_data_channel_messages_sent", Label: "Sent"},
+			},
+		},
+		"colibri_websocket": {
+			Label: fmt.Sprintf("%s: Colibri WebSocket Messages", labelPrefix),
+			Unit:  mp.UnitInteger,
+			Metrics: []mp.Metrics{
+				{Name: "total_colibri_web_socket_messages_received", Label: "Received"},
+				{Name: "total_colibri_web_socket_messages_sent", Label: "Sent"},
 			},
 		},
 	}
