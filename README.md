@@ -38,8 +38,21 @@ $ mkr plugin install tomohiro/mackerel-plugin-jitsi-videobridge@v0.0.1
 Usage
 --------------------------------------------------------------------------------
 
+### Options:
+
 ```
-mackerel-plugin-jitsi-videobridge [-host=<host>] [-port=<port>] [-tempfile=<tempfile>]
+$ mackerel-plugin-jitsi-videobridge --help
+Usage of mackerel-plugin-jitsi-videobridge:
+  -host string
+        Hostname or IP address of Jitsi Videobridge Colibri REST interface (default "127.0.0.1")
+  -metric-key-prefix string
+        Metric key prefix (default "jitsi-videobridge")
+  -metric-label-prefix string
+        Metric label prefix (default "JVB")
+  -port string
+        Port of Jitsi Videobridge Colibri REST interface (default "80")
+  -tempfile string
+        Temp file name
 ```
 
 ### Example mackerel-agent.conf
