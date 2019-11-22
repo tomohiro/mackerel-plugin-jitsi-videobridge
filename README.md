@@ -15,7 +15,7 @@ The plugin to posts Jitsi Videobridge statistics as custom metrics to Mackerel.
 ![Custom Metrics Example](https://user-images.githubusercontent.com/54254/69406552-a9268580-0d45-11ea-9701-0905b8fefa3e.png)
 
 
-Requirements
+Supporting Jitsi Videobridge
 --------------------------------------------------------------------------------
 
 - Jitsi Videobridge (1124-1 or higher)
@@ -63,6 +63,22 @@ Usage of mackerel-plugin-jitsi-videobridge:
 [plugin.metrics.jitsi-videobridge]
 command = "/usr/bin/mackerel-plugin-jitsi-videobridge -host=127.0.0.1 -port=8080
 ```
+
+
+Development
+--------------------------------------------------------------------------------
+
+### Requirements
+
+- Go 1.13 or higher
+
+### Release by manually
+
+- Install goxz and ghr by `make setup`
+- Edit CHANGELOG.md, git commit, git push
+- git tag vx.y.z (Semantic Versioning)
+- `make dist`
+- GITHUB_TOKEN=... `make release`
 
 
 References
