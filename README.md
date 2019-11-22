@@ -70,13 +70,14 @@ Development
 
 - Go 1.13 or higher
 
+
 ### Release by manually
 
 - Install goxz and ghr by `make setup`
 - Edit CHANGELOG.md, git commit, git push
 - git tag vx.y.z (Semantic Versioning)
-- `make dist`
-- GITHUB_TOKEN=... `make release`
+- `make dist` to build and ship package as release assets
+- GITHUB_TOKEN=... `make release` to publish assets to GitHub
 
 
 References
