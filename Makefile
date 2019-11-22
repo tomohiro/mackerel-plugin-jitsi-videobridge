@@ -15,6 +15,7 @@ help:
 	@echo "  setup        Setup development environment"
 	@echo "  deps         Install runtime dependencies"
 	@echo "  updatedeps   Update runtime dependencies"
+	@echo "  lint		  Lint codes"
 	@echo "  test         Run tests"
 	@echo "  dist         Ship packages as release assets"
 	@echo "  release 	  Publish release assets to GitHub"
@@ -38,11 +39,16 @@ updatedeps:
 	@echo "===> Updating runtime dependencies..."
 	go get -u
 
+lint: deps
+	@echo "===> Running lint..."
+	go vet ./...
+	golint -set_exit_status ./...
+
 test: deps
 	@echo "===> Running tests..."
 	go test -v -cover ./...
 
-dist:
+dist: deps
 	@echo "===> Shipping packages as release assets..."
 	goxz -d $(ASSETS_DIR) -os $(XC_OS) -arch $(XC_ARCH) -pv $(VERSION) 
 
