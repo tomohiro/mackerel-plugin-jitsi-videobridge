@@ -2,6 +2,7 @@ mackerel-plugin-jitsi-videobridge
 ================================================================================
 
 [![GitHub Releases](https://img.shields.io/github/release/tomohiro/mackerel-plugin-jitsi-videobridge.svg?style=flat-square)](https://github.com/tomohiro/mackerel-plugin-jitsi-videobridge/releases)
+[![Build Status](https://img.shields.io/travis/com/tomohiro/mackerel-plugin-jitsi-videobridge.svg?style=flat-square)](https://travis-ci.com/tomohiro/mackerel-plugin-jitsi-videobridge)
 [![Go Report Card](https://goreportcard.com/badge/github.com/tomohiro/mackerel-plugin-jitsi-videobridge?style=flat-square)](https://goreportcard.com/report/github.com/tomohiro/mackerel-plugin-jitsi-videobridge)
 [![Apache License](http://img.shields.io/badge/license-Apache-blue.svg?style=flat-square)](https://github.com/tomohiro/mackerel-plugin-jitsi-videobridgeblob/master/LICENSE)
 
