@@ -39,12 +39,18 @@ func TestMetricKeyPrefix(t *testing.T) {
 	got := plugin.MetricKeyPrefix()
 
 	if want != got {
-		t.Errorf("MetricKeyPrefix: %v should be %v", want, got)
+		t.Errorf("MetricKeyPrefix: %v should be %v", got, want)
 	}
 }
 
 func TestGraphDefinition(t *testing.T) {
-	t.Skip()
+	setup()
+	defer teardown()
+	want := 17
+	got := len(plugin.GraphDefinition())
+	if want != got {
+		t.Errorf("GraphDefinition length: %v should be %v", got, want)
+	}
 }
 
 func TestFetchMetrics(t *testing.T) {
