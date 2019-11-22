@@ -1,11 +1,17 @@
 language: go
 sudo: false
 
+before_install:
+  - go get github.com/mattn/goveralls
+
 matrix:
   fast_finish: true
   include:
     - go: 1.13
       script: make test
+
+after_success:
+    - $HOME/gopath/bin/goveralls -service=travis-ci
 
 notifications:
   email: false
