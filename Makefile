@@ -1,13 +1,13 @@
 # Project information
 OWNER    = "tomohiro"
-PACKAGE  = $(shell basename ${PWD})
+PACKAGE  = $(shell basename $(PWD))
 VERSION  = $(shell git describe --abbrev=0 --tags)
 
 # Build information
-DIST_DIR   = $(shell pwd)/dist
+DIST_DIR   = $(PWD)/dist
 ASSETS_DIR = $(DIST_DIR)/$(VERSION)
-XC_OS	   = "linux darwin"
-XC_ARCH	   = "386 amd64"
+XC_OS      = "linux darwin"
+XC_ARCH    = "386 amd64"
 
 # Tasks
 help:
@@ -15,10 +15,10 @@ help:
 	@echo "  setup        Setup development environment"
 	@echo "  deps         Install runtime dependencies"
 	@echo "  updatedeps   Update runtime dependencies"
-	@echo "  lint		  Lint codes"
+	@echo "  lint         Lint codes"
 	@echo "  test         Run tests"
 	@echo "  dist         Ship packages as release assets"
-	@echo "  release 	  Publish release assets to GitHub"
+	@echo "  release      Publish release assets to GitHub"
 	@echo "  clean        Clean assets"
 	@echo "  help         Show this help messages"
 
