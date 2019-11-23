@@ -86,6 +86,10 @@ Development
 - `make dist` to build and ship package as release assets
 - `GITHUB_TOKEN=... make release` to publish assets to GitHub
 
+### Contributing
+
+Please check out the [CONTIRBUTING](CONTRIBUTING.md) guideline.
+
 
 References
 --------------------------------------------------------------------------------
