@@ -230,7 +230,7 @@ func (p JitsiVideobridgePlugin) GraphDefinition() map[string]mp.Graphs {
 	}
 }
 
-// FetchMetrics fetches metrics from Jitsi Videobridge Colibri REST float64erface
+// FetchMetrics fetches metrics from Jitsi Videobridge Colibri REST interface
 func (p JitsiVideobridgePlugin) FetchMetrics() (map[string]float64, error) {
 	url := fmt.Sprintf("http://%v:%v/colibri/stats", p.Host, p.Port)
 	res, err := http.Get(url)
