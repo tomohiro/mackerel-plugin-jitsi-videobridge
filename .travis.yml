@@ -1,14 +1,17 @@
 language: go
-sudo: false
+go:
+  - 1.13
 
 before_install:
+  - go get golang.org/x/lint/golint
   - go get github.com/mattn/goveralls
 
-matrix:
-  fast_finish: true
-  include:
-    - go: 1.13
-      script: make test
+install:
+  - make deps
+
+script:
+  - make lint
+  - make test
 
 after_success:
     - $HOME/gopath/bin/goveralls -service=travis-ci
