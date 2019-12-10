@@ -50,7 +50,7 @@ test: deps
 
 dist: deps
 	@echo "===> Shipping packages as release assets..."
-	goxz -d $(ASSETS_DIR) -os $(XC_OS) -arch $(XC_ARCH)
+	goxz -d $(ASSETS_DIR) -z -os $(XC_OS) -arch $(XC_ARCH)
 
 release:
 	@echo "===> Publishing release assets to GitHub..."
