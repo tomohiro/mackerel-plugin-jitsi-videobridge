@@ -34,13 +34,13 @@ Installation
 Latest release:
 
 ```
-$ mkr plugin install tomohiro/mackerel-plugin-jitsi-videobridge
+$ mkr plugin install mackerel-plugin-jitsi-videobridge
 ```
 
 Specified release version:
 
 ```
-$ mkr plugin install tomohiro/mackerel-plugin-jitsi-videobridge@v0.0.1
+$ mkr plugin install mackerel-plugin-jitsi-videobridge@v0.0.1
 ```
 
 
