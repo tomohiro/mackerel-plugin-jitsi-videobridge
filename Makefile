@@ -4,10 +4,11 @@ PACKAGE  = $(shell basename $(PWD))
 VERSION  = $(shell git describe --abbrev=0 --tags)
 
 # Build information
-DIST_DIR   = $(PWD)/dist
-ASSETS_DIR = $(DIST_DIR)/$(VERSION)
-XC_OS      = "linux darwin"
-XC_ARCH    = "386 amd64"
+DIST_DIR    = $(PWD)/dist
+ASSETS_DIR  = $(DIST_DIR)/$(VERSION)
+XC_OS       = "linux darwin"
+XC_ARCH     = "386 amd64"
+BUILD_FLAGS = "-w -s"
 
 # Tasks
 help:
@@ -50,7 +51,10 @@ test: deps
 
 dist: deps
 	@echo "===> Shipping packages as release assets..."
-	goxz -d $(ASSETS_DIR) -z -os $(XC_OS) -arch $(XC_ARCH)
+	goxz -d $(ASSETS_DIR) -z -os $(XC_OS) -arch $(XC_ARCH) --build-ldflags=$(BUILD_LDFLAGS)
+	pushd $(ASSETS_DIR); \
+	shasum -a 256 *.zip > ./$(VERSION)_SHA256SUMS; \
+	popd
 
 release:
 	@echo "===> Publishing release assets to GitHub..."
